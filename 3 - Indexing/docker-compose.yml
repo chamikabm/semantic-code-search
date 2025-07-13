@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  # Qdrant Vector Database Service
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_db
+    ports:
+      - "6333:6333" # gRPC port for clients
+      - "6334:6334" # REST API and Web UI port
+    volumes:
+      - qdrant_data:/qdrant/storage # Persist data using a named volume
+    restart: unless-stopped
+
+volumes:
+  # Defines the named volume for persistent Qdrant data
+  qdrant_data:
